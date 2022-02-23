@@ -32,11 +32,19 @@ namespace DiscordRP.Discord
 
         public void UpdatePresence(PresenceState state)
         {
-            DiscordRpc.RichPresence presence = state.create();
+            try
+            {
+                DiscordRpc.RichPresence presence = state.create();
 
-            Debug.Log(string.Format("DiscordRP: Send presence: {0} ({1})", presence, state));
+                Debug.Log(string.Format("DiscordRP: Send presence: {0} ({1})", presence, state));
 
-            DiscordRpc.UpdatePresence(ref presence);
+                DiscordRpc.UpdatePresence(ref presence);
+            }
+            catch (Exception ex)
+            {
+                Debug.Log(ex);
+            }
+            
         }
 
         public void UpdateCallbacks()
